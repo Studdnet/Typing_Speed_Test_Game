@@ -19,11 +19,11 @@ function initTyping() {
 	const characters = typingText.querySelectorAll("span");
 	let typeChar = inputField.value.split("")[charIndex];
 	if (characters[charIndex].innerText === typeChar) {
-		console.log('correct');
+		characters[charIndex].classList.add("correct");
 	} else {
-		console.log('wrong');
+		characters[charIndex].classList.add("incorrect");
 	}
-
+	charIndex++;
 }
 
 randomParagraph();
