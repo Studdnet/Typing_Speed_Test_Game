@@ -1,7 +1,8 @@
 "use strict";
 
 const typingText = document.querySelector(".typing-text p"),
-	inputField = document.querySelector(".wrapper .input-field");
+	inputField = document.querySelector(".wrapper .input-field"),
+	mistakeTag = document.querySelector(".mistake"); 
 
 let charIndex = 0;
 
@@ -17,13 +18,20 @@ function randomParagraph() {
 
 function initTyping() {
 	const characters = typingText.querySelectorAll("span");
-	let typeChar = inputField.value.split("")[charIndex];
-	if (characters[charIndex].innerText === typeChar) {
-		characters[charIndex].classList.add("correct");
+	let typedChar = inputField.value.split("")[charIndex];
+	if (typedChar == null) {
+		charIndex--; 
+		characters[charIndex].classList.remove("correct", "incorrect");
 	} else {
-		characters[charIndex].classList.add("incorrect");
+		if (characters[charIndex].innerText === typedChar) {
+			characters[charIndex].classList.add("correct");
+		} else {
+			characters[charIndex].classList.add("incorrect");
+		}
+		charIndex++;
 	}
-	charIndex++;
+	characters.forEach(span => span.classList.remove("active"));
+	characters[charIndex].classList.add("active");
 }
 
 randomParagraph();
